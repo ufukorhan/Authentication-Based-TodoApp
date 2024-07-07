@@ -31,7 +31,6 @@ public class AuthService {
     }
 
     public String login(String email, String password) {
-        // TODO: accept application/json
         Optional<User> userOptional = userRepository.findByEmailAndPassword(email,password);
         if(userOptional.isPresent()){
             String token = UUID.randomUUID().toString();
@@ -63,7 +62,6 @@ public class AuthService {
         return userResponse;
     }
 
-    // TODO: we might use cache on this function.
     public User getAuthenticatedUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return userRepository.findByEmail(((org.springframework.security.core.userdetails.User)authentication.getPrincipal()).getUsername())

@@ -34,7 +34,8 @@ public class UserService {
 
     public User updateUser(UserRequest userRequest){
         User existUser = authService.getAuthenticatedUser();
-        if(userRepository.existsByEmail(userRequest.getEmail())) {
+        System.out.println(existUser);
+        if(!existUser.getEmail().equals(userRequest.getEmail()) && userRepository.existsByEmail(userRequest.getEmail())) {
             throw new BusinessException("Email already exists!");
         }
         User user = userRequest.toUser();
